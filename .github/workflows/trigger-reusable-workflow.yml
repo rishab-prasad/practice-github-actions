@@ -18,7 +18,8 @@ jobs:
         - name: step1
           uses: actions/checkout@v2
         - name: step2
-          run: env | short
+          run: env
+          
     job2: 
       name: secound job
       runs-on: windows-latest
