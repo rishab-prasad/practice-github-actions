@@ -1,0 +1,20 @@
+name: Tag Registry Examples
+on:
+  workflow_call:
+    inputs:
+      release-version:
+        required: true
+        type: string
+      snapshot-version: 
+        required: true
+        type: string
+
+
+jobs:
+  job1:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Print Passed Parameters
+        run: |
+          echo "Release version: ${{inputs.release-version}}"
+          echo "Snapshot Version: ${{inputs.snapshot-version}}"
