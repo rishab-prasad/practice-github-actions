@@ -29,7 +29,7 @@ jobs:
           run: "Get-ChildItem Env: | Sort-Object Name"
           
     job3:
-      uses: ${{github.repository}}/.github/workflows/reusable-workflow.yml@master
+      uses: ./.github/workflows/reusable-workflow.yml
       with:
         release-version: ${{ github.event.inputs.release-version}}
         snapshot-version: ${{ github.event.inputs.snapshot-version}}
