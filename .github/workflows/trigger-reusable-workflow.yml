@@ -30,6 +30,7 @@ jobs:
           run: "Get-ChildItem Env: | Sort-Object Name"
           
     job3:
+      needs: [job1, job2]
       uses: ./.github/workflows/reusable-workflow.yml
       with:
         release-version: ${{ github.event.inputs.release-version}}
