@@ -2,8 +2,12 @@ name: ENV variable test
 on:
   workflow_dispatch:
     inputs:
-      tag-name:
+      release-version:
         required: true
+        type: string
+      branch-name: 
+        required: true
+        type: string
   release:
     types: [released, prereleased]
 
@@ -14,11 +18,30 @@ jobs:
     steps:
       - name: Set Tag name
         if: github.event_name == 'release'
-        run: echo "TAG_NAME=${{ github.event.release.name }}" >> $GITHUB_ENV
+        run: |
+          echo "RELEASE_VERSION=${{ github.event.release.name }}" >> $GITHUB_ENV
+          echo "BRANCH_NAME=${{ github.event.release.target_commitish }}" >> $GITHUB_ENV
 
       - name: Set Tag name
         if: github.event_name == 'workflow_dispatch'
-        run: echo "TAG_NAME=${{ github.event.inputs.tag-name }}" >> $GITHUB_ENV
+        run: |
+          echo "RELEASE_VERSION=${{ github.event.inputs.release-version }}" >> $GITHUB_ENV
+          echo "BRANCH_NAME=${{ github.event.inputs.branch-name }}" >> $GITHUB_ENV
 
       - name: Print TAG_NAME
         run: echo $TAG_NAME
+        
+  alternate-way:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Set Versions
+        run: |
+          set -x
+          if [ -z "${{github.event.inputs.release-version}}" ] || [ -z "${{github.event.inputs.branch-name}}" ]
+          then
+            echo "RELEASE_VERSION=${{ github.event.release.name }}" >> $GITHUB_ENV
+            echo "BRANCH_NAME=${{ github.event.release.target_commitish }}" >> $GITHUB_ENV
+          else
+            echo "RELEASE_VERSION=${{ github.event.inputs.release-version }}" >> $GITHUB_ENV
+            echo "BRANCH_NAME=${{ github.event.inputs.branch-name }}" >> $GITHUB_ENV
+          fi
