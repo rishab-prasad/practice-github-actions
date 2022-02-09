@@ -1,1 +1,9 @@
-
+on:
+  repository_dispatch:
+    types: [repo_updated]
+jobs:
+  do-the-thing:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Process update
+        run: echo "${{ github.event.client_payload.openapi_file_path }}"
