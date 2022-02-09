@@ -1,6 +1,6 @@
 on:
   repository_dispatch:
-    types: [repo_updated]
+    types: [on-oas-updated]
 jobs:
   do-the-thing:
     runs-on: ubuntu-latest
