@@ -7,7 +7,7 @@ jobs:
             - run: echo "Hello World"
               name: Print Hello World
               
-            - uses: DeLaGuardo/setup-graalvm@5.0
+            - uses: DeLaGuardo/setup-graalvm@4.0
               with:
                   # GraalVM version, no pattern syntax available atm
                   graalvm: '21.3.1'
