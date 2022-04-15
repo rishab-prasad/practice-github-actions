@@ -6,6 +6,15 @@ jobs:
         steps:
             - run: echo "Hello World"
               name: Print Hello World
+              
+            - uses: DeLaGuardo/setup-graalvm@5.0
+              with:
+                  # GraalVM version, no pattern syntax available atm
+                  graalvm: '21.3'
+                  # Java version, optional, defaults to 'java8'. Available options are 'java8' and 'java11'.
+                  java: 'java11'
+                  # Architecture flag, optional, defaults to 'amd64'. Available options are 'amd64' and 'aarch64'. Later is available only for linux runners.
+                  arch: 'amd64'
         
       print-hello-world-in-the-windows:
         runs-on:  windows-latest
