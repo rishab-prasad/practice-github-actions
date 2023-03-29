@@ -15,12 +15,12 @@ jobs:
       - name: Release version
         run: |
           # take only the major and minor versions from release-version and then append .x.
-          DOCS_VERSION=$(echo "${{ github.event.inputs.release-version}}" | awk -F '.' '{print $1"."$2".x"}')"
+          DOCS_VERSION=$(echo "${{ github.event.inputs.release-version}}" | awk -F '.' '{print $1"."$2".x"}')
           echo ${DOCS_VERSION}
           
     
       - name: Snapshot version
         run: |
           # take only the major and minor versions from release-version and then append .x.
-          DOCS_VERSION=$(echo "${{ github.event.inputs.snapshot-version}}" | awk -F '.' '{print $1"."$2".x"}')"
+          DOCS_VERSION=$(echo "${{ github.event.inputs.snapshot-version}}" | awk -F '.' '{print $1"."$2".x"}')
           echo ${DOCS_VERSION}
