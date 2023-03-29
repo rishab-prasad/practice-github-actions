@@ -1,0 +1,26 @@
+name: Test Workflow
+on:
+  workflow_dispatch:
+    inputs:
+      release-version:
+        description: 'Version being released'
+        required: true
+      snapshot-version:
+        description: 'Next snapshot version'
+        required: true
+jobs:
+  test:
+    runs-on: ubuntu-20.04
+    steps:
+      - name: Release version
+        run: |
+          # take only the major and minor versions from release-version and then append .x.
+          echo "DOCS_VERSION=$(echo "${{ github.event.inputs.release-version}}" | awk -F '.' '{print $1"."$2".x"}')" >> $GITHUB_ENV
+          echo ${{ env.DOCS_VERSION }}
+          
+    
+      - name: Snapshot version
+        run: |
+          # take only the major and minor versions from release-version and then append .x.
+          echo "DOCS_VERSION=$(echo "${{ github.event.inputs.snapshot-version}}" | awk -F '.' '{print $1"."$2".x"}')" >> $GITHUB_ENV
+          echo ${{ env.DOCS_VERSION }}
